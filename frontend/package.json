@@ -23,7 +23,10 @@
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
+  },
   "scripts": {
     "dev": "webpack-dev-server --progress --color --inline --hot",
     "porduction": "webpack --progress -p"

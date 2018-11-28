@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '../main/template/Grid';
 import Botao from '../main/template/Botao';
 
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'; // para fazer ligação    
 import { bindActionCreators } from 'redux';
 import { changeDescription } from './TodoActions'
 
@@ -10,6 +10,7 @@ import { changeDescription } from './TodoActions'
  class TodoForm  extends  React.Component {
      
     render() {
+        console.log(this.props.description)
         const keyHandler = (e) => {
             if (e.key === 'Enter') {
                 this.props.pesquisar();

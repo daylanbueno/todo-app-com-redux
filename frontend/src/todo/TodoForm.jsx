@@ -2,7 +2,12 @@ import React from 'react';
 import { Grid } from '../main/template/Grid';
 import Botao from '../main/template/Botao';
 
-export default class extends  React.Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeDescription } from './TodoActions'
+
+
+ class TodoForm  extends  React.Component {
      
     render() {
         const keyHandler = (e) => {
@@ -17,7 +22,7 @@ export default class extends  React.Component {
                            className='form-control'
                            placeholder='Adicione uma tarefa'
                            value={this.props.description}
-                           onChange={this.props.prenchimentoInput}
+                           onChange={this.props.changeDescription}
                            onKeyUp={keyHandler}>
                     </input>
             </Grid>
@@ -30,3 +35,7 @@ export default class extends  React.Component {
         )
     }
 }
+
+const mapStateToProps = state => ({description: state.todo.description});
+const mapDispatchToProps  = dispatch => bindActionCreators({ changeDescription }, dispatch);
+export default  connect(mapStateToProps, mapDispatchToProps)(TodoForm);

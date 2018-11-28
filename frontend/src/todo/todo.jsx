@@ -4,7 +4,7 @@ import PageHeader  from '../../src/main/template/pageHeader';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
-const URL = 'http://localhost:3003/api/todos';
+const URL = 'http://localhost:3000api/todos';
 
 export default class Todo extends React.Component  {
     

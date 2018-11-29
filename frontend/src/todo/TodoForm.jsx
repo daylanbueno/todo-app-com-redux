@@ -14,13 +14,6 @@ import { changeDescription, search, add } from './TodoActions'
        this.props.search();  
      }
 
-     keyHandler (e) {
-        const {search, add ,description } =  this.props
-        if (e.key === 'Enter') {
-            this.search();
-        } 
-    }
-    
      render() {
         const {search, add, description } = this.props
         console.log(this.props.description)
@@ -36,7 +29,7 @@ import { changeDescription, search, add } from './TodoActions'
                     </input>
             </Grid>
             <Grid cols='12 3 2'> 
-                <Botao style='primary' onClick={()=>add(description)}  icon='plus'/>
+                <Botao di style='primary' disabled={this.props.description == ''} onClick={()=>add(description)}  icon='plus'/>
                 <Botao style='info'    onClick={() =>search()}    icon='search'/>
                 <Botao style='default' onClick={this.props.limpar}      icon='close'/>
             </Grid>      

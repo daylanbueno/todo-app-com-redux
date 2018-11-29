@@ -1,6 +1,10 @@
 import React from 'react';
 import Botao from '../main/template/Botao';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import { marcaFeito,marcaPendente,remover} from './TodoActions';
+
 
 const TodoList = props => {
 
@@ -36,4 +40,5 @@ const TodoList = props => {
 }
 
 const mapStateToProps = state => ({list: state.todo.list})
-export default connect(mapStateToProps)(TodoList)
+const mapDispatchToProps = (dispatch) => bindActionCreators({marcaFeito,marcaPendente,remover},dispatch)
+export default connect(mapStateToProps,mapDispatchToProps)(TodoList)

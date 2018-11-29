@@ -4,18 +4,26 @@ import Botao from '../main/template/Botao';
 
 import { connect } from 'react-redux'; // para fazer ligação    
 import { bindActionCreators } from 'redux';
-import { changeDescription } from './TodoActions'
+import { changeDescription, search, add } from './TodoActions'
 
 
  class TodoForm  extends  React.Component {
-     
-    render() {
+
+     componentDidMount() {
+        console.log('inciando')
+       this.props.search();  
+     }
+
+     keyHandler (e) {
+        const {search, add ,description } =  this.props
+        if (e.key === 'Enter') {
+            this.search();
+        } 
+    }
+    
+     render() {
+        const {search, add, description } = this.props
         console.log(this.props.description)
-        const keyHandler = (e) => {
-            if (e.key === 'Enter') {
-                this.props.pesquisar();
-            }
-        }
         return(
             <div role='form' className='todoForm'> 
             <Grid cols='12 9 10'>
@@ -24,12 +32,12 @@ import { changeDescription } from './TodoActions'
                            placeholder='Adicione uma tarefa'
                            value={this.props.description}
                            onChange={this.props.changeDescription}
-                           onKeyUp={keyHandler}>
+                           onKeyUp={this.keyHandler}>
                     </input>
             </Grid>
             <Grid cols='12 3 2'> 
-                <Botao style='primary' onClick={this.props.adicionarTaferefa}  icon='plus'/>
-                <Botao style='info'    onClick={this.props.pesquisar}    icon='search'/>
+                <Botao style='primary' onClick={()=>add(description)}  icon='plus'/>
+                <Botao style='info'    onClick={() =>search()}    icon='search'/>
                 <Botao style='default' onClick={this.props.limpar}      icon='close'/>
             </Grid>      
             </div>
@@ -38,5 +46,5 @@ import { changeDescription } from './TodoActions'
 }
 
 const mapStateToProps = state => ({description: state.todo.description});
-const mapDispatchToProps  = dispatch => bindActionCreators({ changeDescription }, dispatch);
+const mapDispatchToProps  = dispatch => bindActionCreators({ changeDescription,search,add }, dispatch);
 export default  connect(mapStateToProps, mapDispatchToProps)(TodoForm);

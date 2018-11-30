@@ -6,18 +6,31 @@ export const changeDescription = event => ({
     payload: event.target.value
 })
 
-export const search = () => {
-    const request = axios.get(`${URL}?sort=-createdAt`)
+export const searchTete = () => {
+   
+    const pesquisa = description ? `&description__regex=/${description}/` : '';
+    const request = axios.get(`${URL}?sort=-createdAt${pesquisa}`)
     return {
         type: 'TODO_SEARCHED',
         payload: request
     }
 } 
 
+
+export const search = () => {
+   return (dispatch,getState) => {
+       const  description = getState().todo.description;
+       const pesquisa = description ? `&description__regex=/${description}/` : '';
+       const request = axios.get(`${URL}?sort=-createdAt${pesquisa}`)
+       .then(resp  =>  dispatch({type:'TODO_SEARCHED', payload:resp.data}))
+   }
+   
+} 
+
 export const add = (description)  => {
     return dispatch => {
         axios.post(URL, {description:description})
-        .then( resp => dispatch({ type :'TODO_ADD', payload: resp.data}))
+        .then( resp => dispatch({ type :'TODO_CLEAR', payload: resp.data}))
         .then( resp => dispatch(search()))    
     }
    
@@ -45,4 +58,12 @@ export const remover = (todo) => {
         .then( resp => dispatch({ type :'TODO_DELETED', payload: resp.data}))
         .then(resp => dispatch(search()));
     }
+}
+
+export const clear = () => {
+    return [
+        {type: 'TODO_CLEAR', payload: event.target.value},
+        search()
+    ]
+    
 }

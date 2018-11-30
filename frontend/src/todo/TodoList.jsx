@@ -3,7 +3,7 @@ import Botao from '../main/template/Botao';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { marcaFeito,marcaPendente,remover} from './TodoActions';
+import {marcaFeito,marcaPendente,remover } from './TodoActions';
 
 
 const TodoList = props => {
